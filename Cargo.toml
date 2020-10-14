@@ -12,6 +12,8 @@ edition = "2018"
 
 [features]
 default = []
+# Unstable feature to support being a libstd dependency
+rustc-dep-of-std = ["compiler_builtins", "core", "alloc"]
 
 # This tells the compiler to assume that a Nightly toolchain is being used and
 # that it should activate any useful Nightly things accordingly.
@@ -26,6 +28,11 @@ members = [
   "crates/compiler-builtins-smoke-test",
   "crates/libm-bench",
 ]
+
+[dependencies]
+compiler_builtins = {version = "0.1", optional = true}
+core = {version = "1.0", optional = true, package = "rustc-std-workspace-core"}
+alloc = {version = "1.0", optional = true, package = "rustc-std-workspace-alloc"}
 
 [dev-dependencies]
 no-panic = "0.1.8"
